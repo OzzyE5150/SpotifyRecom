@@ -12,6 +12,7 @@ const SpotifyRecommender = ({ auth }) => {
     const [searchString, setSearchString] = useState('');
     const [selectedArtists, setSelectedArtists] = useState([]);
     const [sliderValues, setSliderValues] = useState({});
+    const [results, setResults] = useState(null);
 
     const searchSpotify = async () => {
         const url = 'https://api.spotify.com/v1/search';
@@ -59,6 +60,7 @@ const SpotifyRecommender = ({ auth }) => {
           }
         });
         console.log(data);
+        setResults(data);
       };
 
     return (

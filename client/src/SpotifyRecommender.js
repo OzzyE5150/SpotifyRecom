@@ -5,6 +5,7 @@ import { Search } from '@material-ui/icons';
 import axios from 'axios';
 import SearchResults from './components/SearchResults';
 import SliderBoard from './components/SliderBoard';
+import ResultsList from './components/ResultsList';
 
 const SpotifyRecommender = ({ auth }) => {
     const { token } = auth;
@@ -103,6 +104,9 @@ const SpotifyRecommender = ({ auth }) => {
             Get Recommendations
           </Button>
         </Grid>
+          <Grid item xs={12}>
+            {results && <ResultsList results={results}/> }
+          </Grid>
         </div>
     );
 };

@@ -1,0 +1,22 @@
+{
+  "name": "spotifyrecom",
+  "version": "1.0.0",
+  "description": "spotify recommendation app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "jp",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cookie-session": "^2.0.0",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "helmet": "^6.0.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "touch": "^3.1.0"
+  }
+}

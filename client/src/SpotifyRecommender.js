@@ -27,6 +27,39 @@ const SpotifyRecommender = ({ auth }) => {
           setSearchResults(data.artists.items);
         }
       }
+      
+      const getRecommendations = async () => {
+        const url = 'https://api.spotify.com/v1/recommendations';
+      
+        // get artists
+        let selectedArtistsString;
+        if (selectedArtists.length < 0) {
+          return;
+        } else {
+          selectedArtistsString = `seed_artists=${selectedArtists.join(',')}`;
+        }
+      
+        // getsliders
+        let min = [];
+        let max = [];
+        Object.keys(sliderValues).forEach(slider => {
+          if (sliderValues[slider].enabled) {
+            // then we add our min and max values
+            min.push(`min_${slider}=${sliderValues[slider].value[0]}`);
+            max.push(`max_${slider}=${sliderValues[slider].value[1]}`);
+          }
+        });
+        const minString = min.join('&');
+        const maxString = max.join('&');
+      
+      
+        const {data} = await axios.get(`${url}?${selectedArtistsString}&${minString}&${maxString}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        console.log(data);
+      };
 
     return (
         <div className={"App"}>
@@ -62,7 +95,12 @@ const SpotifyRecommender = ({ auth }) => {
             </Grid>
             <Grid item xs={6}>
             <SliderBoard onChange={setSliderValues}/>
-          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Button variant={'contained'} onClick={getRecommendations}>
+            Get Recommendations
+          </Button>
+        </Grid>
         </div>
     );
 };

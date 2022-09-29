@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import './App.css';
+import Home from "./Home";
+import Loading from "./Loading";
+import SpotifyRecommender from "./SpotifyRecommender";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [auth, setAuth] = useState(null);
+
+  useEffect(() => {
+    axios.get('/auth/current-session').then(({data}) => {
+      setAuth(data);
+    })
+  }, []);
+
+  if (auth === null) {
+    return <Loading/>
+  }
+  if (auth) {
+    return <SpotifyRecommender auth={auth}/>
+  }
+  return <Home/>
 }
 
 export default App;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Grid, TextField, Button } from '@material-ui/core';
+import { Grid, TextField, Button, Typography } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import axios from 'axios';
 import SearchResults from './components/SearchResults';
@@ -33,6 +33,13 @@ const SpotifyRecommender = ({ auth }) => {
                     Spotify Recommender
                 </Grid>
                 <Grid item xs={6}>
+                <Grid item xs={12}>
+              {selectedArtists.map((artist, index) => (
+                <Typography>
+                  {index+1}. {artist}
+                </Typography>
+              ))}
+            </Grid>
                     <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row' }}>
                         <TextField
                             variant={'outlined'}

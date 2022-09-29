@@ -40,7 +40,7 @@ const SpotifyRecommender = ({ auth }) => {
                             onChange={event => setSearchString(event.target.value)}
                             value={searchString}
                         />
-                        <Button style={{ backgroundColor: '#ff905b' }}>
+                        <Button style={{ backgroundColor: '#ff905b' }} onClick={searchSpotify}>
                             <Search />
                         </Button>
                     </Grid>

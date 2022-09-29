@@ -3,11 +3,13 @@ import './App.css';
 import { Grid, TextField, Button } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import axios from 'axios';
+import SearchResults from './components/SearchResults';
 
 const SpotifyRecommender = ({ auth }) => {
     const { token } = auth;
     const [searchResults, setSearchResults] = useState([]);
     const [searchString, setSearchString] = useState('');
+    const [selectedArtists, setSelectedArtists] = useState([]);
 
     const searchSpotify = async () => {
         const url = 'https://api.spotify.com/v1/search';
@@ -46,6 +48,7 @@ const SpotifyRecommender = ({ auth }) => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
+                <SearchResults onChange={setSelectedArtists} results={searchResults}/>
                 </Grid>
             </Grid>
         </div>

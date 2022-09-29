@@ -2,11 +2,28 @@ import React, { useState } from 'react';
 import './App.css';
 import { Grid, TextField, Button } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
+import axios from 'axios';
 
 const SpotifyRecommender = ({ auth }) => {
     const { token } = auth;
     const [searchResults, setSearchResults] = useState([]);
     const [searchString, setSearchString] = useState('');
+
+    const searchSpotify = async () => {
+        const url = 'https://api.spotify.com/v1/search';
+        const searchQuery = encodeURIComponent(searchString);
+        const typeQuery = `type=artist`;
+        const {data} = await axios.get(`${url}?q=${searchQuery}&${typeQuery}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        console.log(data);
+        if (data && data.artists) {
+          setSearchResults(data.artists.items);
+        }
+      }
+
     return (
         <div className={"App"}>
             <Grid container style={{ padding: 20 }} spacing={1}>
